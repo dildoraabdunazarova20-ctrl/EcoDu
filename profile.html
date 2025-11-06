@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - EcoDu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="nav-logo">
+                <h2 class="logo-text">EcoDu🌱</h2>
+            </a>
+            <ul class="nav-menu">
+                <button id="menu-close-button" class="fas fa-times"></button>
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="index.html#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="index.html#lessons" class="nav-link">Lessons</a></li>
+                <li class="nav-item"><a href="profile.html" class="nav-link">Profile</a></li>
+            </ul>
+            <button id="menu-open-button" class="fas fa-bars"></button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="profile-section">
+            <div class="section-content">
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="avatar-container">
+                            <img id="profile-avatar" src="https://via.placeholder.com/150" alt="Profile Avatar" class="profile-avatar">
+                            <label for="avatar-upload" class="avatar-upload-btn" id="edit-avatar-btn" style="display: none;">
+                                <i class="fas fa-camera"></i>
+                            </label>
+                            <input type="file" id="avatar-upload" accept="image/*" style="display: none;">
+                        </div>
+                        <div class="profile-info">
+                            <h2 id="profile-name" class="profile-name">Loading...</h2>
+                            <p id="profile-email" class="profile-email">Loading...</p>
+                            <p id="profile-bio" class="profile-bio">No bio yet</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-actions" id="profile-actions">
+                        <button id="edit-profile-btn" class="button primary">Edit Profile</button>
+                        <button id="logout-btn" class="button secondary">Logout</button>
+                    </div>
+
+                    <div class="edit-profile-form" id="edit-profile-form" style="display: none;">
+                        <h3>Edit Profile</h3>
+                        <div class="input-group">
+                            <label for="edit-name">Name</label>
+                            <input type="text" id="edit-name" placeholder="Your name">
+                        </div>
+                        <div class="input-group">
+                            <label for="edit-bio">Bio</label>
+                            <textarea id="edit-bio" placeholder="Tell us about yourself" rows="4"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button id="save-profile-btn" class="button primary">Save Changes</button>
+                            <button id="cancel-edit-btn" class="button secondary">Cancel</button>
+                        </div>
+                        <p id="edit-msg" class="form-msg"></p>
+                    </div>
+
+                    <div class="profile-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-video"></i>
+                            <h3 id="videos-watched">0</h3>
+                            <p>Videos Watched</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-comment"></i>
+                            <h3 id="comments-made">0</h3>
+                            <p>Comments</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-clipboard-check"></i>
+                            <h3 id="quizzes-completed">0</h3>
+                            <p>Quizzes Completed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer-section">
+            <div class="section-content">
+                <p class="copyright-text">© 2025 EcoDu. All rights reserved.</p>
+                <div class="social-link-list">
+                    <a href="#" class="social-link"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-telegram"></i></a>
+                </div>
+                <p class="policy-text">
+                    <a href="#" class="policy-link">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="#" class="policy-link">Terms of Service</a>
+                    <span class="separator">|</span>
+                    <a href="#" class="policy-link">Contact Us</a>
+                </p>
+            </div>
+        </footer>
+    </main>
+
+    <script type="module" src="profile.js"></script>
+</body>
+</html>

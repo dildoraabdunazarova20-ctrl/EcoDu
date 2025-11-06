@@ -575,3 +575,230 @@ header .navbar{
         gap: 20px;
     }
 }
+
+/* Enhanced Animations and Micro-interactions */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.lessons-item {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.lessons-item:nth-child(1) { animation-delay: 0.1s; }
+.lessons-item:nth-child(2) { animation-delay: 0.2s; }
+.lessons-item:nth-child(3) { animation-delay: 0.3s; }
+.lessons-item:nth-child(4) { animation-delay: 0.4s; }
+.lessons-item:nth-child(5) { animation-delay: 0.5s; }
+
+.lessons-item a {
+    position: relative;
+    overflow: hidden;
+}
+
+.lessons-item a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(49, 71, 58, 0.8), rgba(124, 131, 99, 0.8));
+    opacity: 0;
+    transition: 0.3s ease;
+    z-index: 1;
+    border-radius: 20px;
+}
+
+.lessons-item a:hover::before {
+    opacity: 1;
+}
+
+.lessons-item a::after {
+    content: '▶ Watch';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    z-index: 2;
+    transition: 0.3s ease;
+}
+
+.lessons-item a:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.hero-section .hero-details {
+    animation: slideInRight 0.8s ease;
+}
+
+.hero-section .hero-image-wrapper {
+    animation: scaleIn 0.8s ease;
+}
+
+.navbar .nav-link {
+    position: relative;
+}
+
+.navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: greenyellow;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.navbar .nav-link:hover::after {
+    width: 80%;
+}
+
+.lessons-item {
+    position: relative;
+    overflow: visible;
+}
+
+.lessons-item::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(135deg, #31473A, #7C8363);
+    border-radius: 25px;
+    opacity: 0;
+    z-index: -1;
+    transition: 0.3s ease;
+}
+
+.lessons-item:hover::before {
+    opacity: 0.1;
+}
+
+.button {
+    position: relative;
+    overflow: hidden;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.hero-section .button:active {
+    transform: scale(0.95);
+}
+
+.team-item {
+    transition: 0.3s ease;
+}
+
+.team-item:hover {
+    transform: translateY(-10px);
+}
+
+.team-item .team-image {
+    transition: 0.3s ease;
+    filter: grayscale(0%);
+}
+
+.team-item:hover .team-image {
+    filter: grayscale(0%) brightness(1.1);
+    box-shadow: 0 15px 40px rgba(49, 71, 58, 0.3);
+}
+
+.about-section .about-image {
+    transition: 0.5s ease;
+}
+
+.about-section .about-image:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
+.social-link {
+    transition: 0.3s ease;
+    display: inline-block;
+}
+
+.social-link:hover {
+    transform: translateY(-5px) rotate(360deg);
+}
+
+*:focus {
+    outline: 3px solid rgba(49, 71, 58, 0.3);
+    outline-offset: 2px;
+}
+
+.lessons-item a img {
+    transition: transform 0.5s ease, filter 0.3s ease;
+}
+
+.lessons-item a:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.9);
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #7C8363 0%, #5a6447 100%);
+}
+
+.section-title {
+    animation: fadeInUp 0.8s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}

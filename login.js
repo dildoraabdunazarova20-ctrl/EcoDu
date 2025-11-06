@@ -1,33 +1,48 @@
+import { login } from './auth.js';
+
 const loginForm = document.getElementById('login-form');
 const loginMsg = document.getElementById('login-msg');
+
 document.querySelectorAll('.pw-toggle').forEach(btn => {
   btn.addEventListener('click', () => {
     const input = btn.parentElement.querySelector('input');
     const icon = btn.querySelector('i');
-    if (input.type === 'password') { input.type = 'text'; icon.classList.replace('fa-eye','fa-eye-slash'); }
-    else { input.type = 'password'; icon.classList.replace('fa-eye-slash','fa-eye'); }
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.classList.replace('fa-eye', 'fa-eye-slash');
+    } else {
+      input.type = 'password';
+      icon.classList.replace('fa-eye-slash', 'fa-eye');
+    }
   });
 });
 
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   loginMsg.textContent = '';
+  loginMsg.style.color = '#b00020';
+
   const email = loginForm.email.value.trim();
   const password = loginForm.password.value;
-  if (!email || !password) { loginMsg.textContent = 'Enter email and password.'; return; }
-  try {
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ email, password })
-    });
-    const data = await res.json();
-    if (!res.ok) { loginMsg.textContent = data.message || 'Login failed.'; return; }
-    if (data.token) localStorage.setItem('token', data.token);
+
+  if (!email || !password) {
+    loginMsg.textContent = 'Please enter email and password.';
+    return;
+  }
+
+  const submitBtn = loginForm.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Logging in...';
+
+  const result = await login(email, password);
+
+  if (result.success) {
     loginMsg.style.color = '#2a8f3a';
-    loginMsg.textContent = 'Login successful. Redirecting...';
+    loginMsg.textContent = 'Login successful! Redirecting...';
     setTimeout(() => location.href = 'index.html', 800);
-  } catch (err) {
-    loginMsg.textContent = 'Network error.';
+  } else {
+    loginMsg.textContent = result.error || 'Login failed. Please check your credentials.';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Log In';
   }
 });

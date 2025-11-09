@@ -1,5 +1,5 @@
 .profile-section {
-    background: linear-gradient(135deg, #EDF4F2 0%, #d4e7d4 100%);
+    background: #EDF4F2;
     min-height: 100vh;
     padding: 120px 20px 50px;
 }
@@ -10,19 +10,7 @@
     background: white;
     border-radius: 20px;
     padding: 40px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    animation: fadeInUp 0.6s ease;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 .profile-header {
@@ -45,13 +33,6 @@
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid #31473A;
-    transition: 0.3s ease;
-    box-shadow: 0 5px 20px rgba(49, 71, 58, 0.2);
-}
-
-.profile-avatar:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 30px rgba(49, 71, 58, 0.3);
 }
 
 .avatar-upload-btn {
@@ -60,25 +41,19 @@
     right: 5px;
     background: #31473A;
     color: white;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: 0.3s ease;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 .avatar-upload-btn:hover {
     background: #2a3a2f;
-    transform: scale(1.15);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-}
-
-.avatar-upload-btn i {
-    font-size: 1.2rem;
+    transform: scale(1.1);
 }
 
 .profile-info {
@@ -86,37 +61,22 @@
 }
 
 .profile-name {
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: bold;
     color: #31473A;
-    margin-bottom: 8px;
-    letter-spacing: -0.5px;
+    margin-bottom: 5px;
 }
 
 .profile-email {
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: #7C8363;
     margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.profile-email::before {
-    content: '\f0e0';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 400;
-    color: #31473A;
 }
 
 .profile-bio {
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: #555;
-    line-height: 1.7;
-    padding: 15px;
-    background: #f8faf9;
-    border-radius: 10px;
-    border-left: 4px solid #31473A;
+    line-height: 1.6;
 }
 
 .profile-actions {
@@ -158,25 +118,10 @@
 }
 
 .edit-profile-form {
-    background: linear-gradient(135deg, #f8faf9 0%, #e8f0e9 100%);
+    background: #f8faf9;
     padding: 30px;
     border-radius: 15px;
     margin-bottom: 30px;
-    border: 2px solid #EDF4F2;
-    animation: slideDown 0.4s ease;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        max-height: 0;
-        padding: 0 30px;
-    }
-    to {
-        opacity: 1;
-        max-height: 500px;
-        padding: 30px;
-    }
 }
 
 .edit-profile-form h3 {
@@ -238,29 +183,12 @@
     padding: 30px;
     border-radius: 15px;
     text-align: center;
-    transition: 0.4s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: 0.5s;
-}
-
-.stat-card:hover::before {
-    left: 100%;
+    transition: 0.3s ease;
 }
 
 .stat-card:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 15px 40px rgba(49, 71, 58, 0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(49, 71, 58, 0.3);
 }
 
 .stat-card i {
@@ -280,28 +208,6 @@
     opacity: 0.9;
 }
 
-.button:active {
-    transform: scale(0.97);
-}
-
-.input-group input:hover,
-.input-group textarea:hover {
-    border-color: #7C8363;
-}
-
-.profile-header {
-    animation: fadeIn 0.8s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
 @media screen and (max-width: 768px) {
     .profile-container {
         padding: 25px;
@@ -311,14 +217,6 @@
         flex-direction: column;
         align-items: center;
         text-align: center;
-    }
-
-    .profile-name {
-        font-size: 1.8rem;
-    }
-
-    .profile-email::before {
-        display: none;
     }
 
     .profile-actions {
@@ -331,10 +229,5 @@
 
     .profile-stats {
         grid-template-columns: 1fr;
-    }
-
-    .avatar-upload-btn {
-        width: 40px;
-        height: 40px;
     }
 }

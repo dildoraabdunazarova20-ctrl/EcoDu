@@ -3,20 +3,25 @@ import { getCurrentUser, getProfile } from './supabase-client.js';
 async function init() {
     const user = await getCurrentUser();
 
+    const profileNav = document.getElementById('profile-nav');
+    const authNav = document.getElementById('auth-nav');
+
     if (user) {
         const profile = await getProfile(user.id);
 
-        document.getElementById('profile-nav').style.display = 'block';
-        document.getElementById('auth-nav').style.display = 'none';
+        // Show profile link, hide signup
+        if (profileNav) profileNav.style.display = 'block';
+        if (authNav) authNav.style.display = 'none';
 
-        const authNavLink = document.querySelector('#auth-nav a');
-        if (authNavLink) {
-            authNavLink.textContent = profile?.name || 'Profile';
-            authNavLink.href = 'profile.html';
+        // Update the profile link text if needed
+        const profileLink = document.querySelector('#profile-nav a');
+        if (profileLink && profile?.name) {
+            profileLink.textContent = profile.name;
         }
     } else {
-        document.getElementById('profile-nav').style.display = 'none';
-        document.getElementById('auth-nav').style.display = 'block';
+        // Show signup, hide profile
+        if (profileNav) profileNav.style.display = 'none';
+        if (authNav) authNav.style.display = 'block';
     }
 }
 

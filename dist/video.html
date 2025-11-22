@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Watch Video - EcoDu</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+  <script type="module" crossorigin src="/assets/video-oYy1yvPc.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/supabase-client-BNm33IeM.js">
+  <link rel="stylesheet" crossorigin href="/assets/video-DV4mwx72.css">
+</head>
+<body>
+
+<header class="header">
+   <section class="flex">
+      <a href="index.html" class="logo">EcoDu🌱</a>
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+      </div>
+      <div class="profile">
+         <img src="https://via.placeholder.com/100" class="image" alt="">
+         <h3 class="name">Guest</h3>
+         <p class="role">viewer</p>
+         <a href="index.html" class="btn">Home</a>
+         <div class="flex-btn">
+            <a href="login.html" class="option-btn">login</a>
+            <a href="register.html" class="option-btn">register</a>
+         </div>
+      </div>
+   </section>
+</header>
+
+<div class="side-bar">
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+   <div class="profile">
+      <img src="data:image/jpeg;base64,aHR0cHM6Ly9zdGFja2JsaXR6LmNvbS9zdG9yYWdlL2Jsb2JzL3JlZGlyZWN0L2V5SmZjbUZwYkhNaU9uc2laR0YwWVNJNk5USTJOVFU1T1Rjc0luQjFjaUk2SW1Kc2IySmZhV1FpZlgwPS0tNDllMGZkYmNiZTY0ZDQ1OTQ5OGY2YTc2MDUzOTJkMjE0YzZjOTA0MS8tRUNPRFUuanBn" class="image" alt="">
+      <a href="index.html" class="btn">Home</a>
+   </div>
+   <nav class="navbar">
+      <a href="#" data-slug="plastik-ifloslanish"><i class="fa-solid fa-bottle-water"></i><span>Plastik ifloslanish</span></a>
+      <a href="#" data-slug="o'rmonlar-kesilishi"><i class="fa-solid fa-tree"></i><span>O'rmonlar kesilishi</span></a>
+      <a href="#" data-slug="havo-ifloslanishi"><i class="fa-solid fa-wind"></i><span>Havo ifloslanishi</span></a>
+      <a href="#" data-slug="suv-ifloslanishi"><i class="fa-solid fa-glass-water-droplet"></i><span>Suv ifloslanishi</span></a>
+      <a href="#" data-slug="yovvyi-tabiat"><i class="fa-solid fa-hippo"></i><span>Yovvoyi tabiat</span></a>
+   </nav>
+</div>
+
+<section class="watch-video">
+   <div class="video-container">
+      <div class="video">
+         <iframe id="video-iframe" width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <h2 class="title" id="video-title">Loading...</h2>
+      <p id="video-description">Loading...</p>
+
+      <div class="engagement-bar">
+         <button id="like-btn" class="engagement-btn">
+            <i class="far fa-heart"></i>
+            <span id="like-count">0</span>
+         </button>
+         <button id="quiz-btn" class="engagement-btn">
+            <i class="fas fa-clipboard-question"></i>
+            <span>Take Quiz</span>
+         </button>
+      </div>
+
+      <div class="info">
+         <p class="date"><i class="fas fa-calendar"></i><span id="video-date">Loading...</span></p>
+      </div>
+
+      <div class="tutor">
+         <img src="Nurjahon.jpg" alt="">
+         <div>
+            <h3>Nurjahon</h3>
+            <span>Video developer</span>
+         </div>
+      </div>
+
+      <div class="comments-section">
+         <h3 class="comments-title">
+            <i class="fas fa-comments"></i>
+            Comments <span id="comment-count">(0)</span>
+         </h3>
+
+         <div id="comment-form-container">
+            <div class="comment-form">
+               <textarea id="comment-input" placeholder="Add a comment..." rows="3"></textarea>
+               <button id="post-comment-btn" class="btn">Post Comment</button>
+            </div>
+         </div>
+
+         <div id="comments-list" class="comments-list"></div>
+      </div>
+   </div>
+</section>
+
+<div id="quiz-modal" class="modal" style="display: none;">
+   <div class="modal-content">
+      <span class="close-modal" id="close-quiz-modal">&times;</span>
+      <h2 id="quiz-title">Quiz</h2>
+      <p id="quiz-description"></p>
+
+      <div id="quiz-content"></div>
+
+      <div class="quiz-actions">
+         <button id="submit-quiz-btn" class="btn">Submit Quiz</button>
+      </div>
+
+      <div id="quiz-results" style="display: none;">
+         <h3>Quiz Results</h3>
+         <p class="score-text">You scored <span id="quiz-score"></span> out of <span id="quiz-total"></span>!</p>
+         <button id="retake-quiz-btn" class="option-btn">Retake Quiz</button>
+      </div>
+   </div>
+</div>
+
+<footer class="footer-section">
+   <div class="section-content">
+      <p class="copyright-text">© 2025 EcoDu. All rights reserved.</p>
+      <div class="social-link-list">
+         <a href="#" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+         <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+         <a href="#" class="social-link"><i class="fa-brands fa-telegram"></i></a>
+      </div>
+      <p class="policy-text">
+         <a href="#" class="policy-link">Privacy Policy</a>
+         <span class="separator">|</span>
+         <a href="#" class="policy-link">Terms of Service</a>
+         <span class="separator">|</span>
+         <a href="#" class="policy-link">Contact Us</a>
+      </p>
+   </div>
+</footer>
+
+</body>
+</html>

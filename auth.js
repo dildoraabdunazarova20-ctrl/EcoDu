@@ -1,120 +1,105 @@
-// supabase-client.js - Updated for Username Authentication
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+import { supabase, getCurrentUser, getProfile, signUp as supabaseSignUp, signIn as supabaseSignIn, signOut as supabaseSignOut } from './supabase-client.js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+let currentUser = null;
+let currentProfile = null;
 
-if (!supabaseUrl || !supabaseKey) {
-  console.error('Supabase credentials not found. Please check your environment variables.');
-}
+export async function initAuth() {
+  const { data: { session } } = await supabase.auth.getSession();
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
-
-// Get current user from localStorage (username-based auth)
-export async function getCurrentUser() {
-  const username = localStorage.getItem('ecodu_username');
-  if (!username) return null;
-  
-  const { data, error } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('username', username)
-    .maybeSingle();
-    
-  if (error || !data) {
-    localStorage.removeItem('ecodu_username');
-    return null;
+  if (session?.user) {
+    currentUser = session.user;
+    currentProfile = await getProfile(session.user.id);
+    updateUIForAuthenticatedUser();
+  } else {
+    updateUIForUnauthenticatedUser();
   }
-  
-  return data;
+
+  supabase.auth.onAuthStateChange((async (event, session) => {
+    if (event === 'SIGNED_IN' && session?.user) {
+      currentUser = session.user;
+      currentProfile = await getProfile(session.user.id);
+      updateUIForAuthenticatedUser();
+    } else if (event === 'SIGNED_OUT') {
+      currentUser = null;
+      currentProfile = null;
+      updateUIForUnauthenticatedUser();
+    }
+  }));
 }
 
-export async function getProfile(username) {
-  const { data, error } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('username', username)
-    .maybeSingle();
+export function getAuthUser() {
+  return { user: currentUser, profile: currentProfile };
+}
 
-  if (error) {
-    console.error('Error fetching profile:', error);
-    return null;
+export async function register(email, password, name) {
+  try {
+    const data = await supabaseSignUp(email, password, name);
+    return { success: true, data };
+  } catch (error) {
+    return { success: false, error: error.message };
   }
-  return data;
 }
 
-// Username-based registration
-export async function signUp(username, password, name) {
-  // Check if username already exists
-  const { data: existingUser } = await supabase
-    .from('profiles')
-    .select('username')
-    .eq('username', username)
-    .maybeSingle();
-    
-  if (existingUser) {
-    throw new Error('Username already exists');
+export async function login(email, password) {
+  try {
+    const data = await supabaseSignIn(email, password);
+    currentUser = data.user;
+    currentProfile = await getProfile(data.user.id);
+    return { success: true, data };
+  } catch (error) {
+    return { success: false, error: error.message };
   }
-  
-  // Create new user profile
-  const { data, error } = await supabase
-    .from('profiles')
-    .insert([
-      {
-        username: username,
-        password: password, // In production, hash this!
-        name: name,
-        bio: '',
-        avatar_url: null
-      }
-    ])
-    .select()
-    .single();
-
-  if (error) throw error;
-  
-  // Auto login after registration
-  localStorage.setItem('ecodu_username', username);
-  
-  return data;
 }
 
-// Username-based login
-export async function signIn(username, password) {
-  const { data, error } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('username', username)
-    .eq('password', password)
-    .maybeSingle();
-
-  if (error || !data) {
-    throw new Error('Invalid username or password');
+export async function logout() {
+  try {
+    await supabaseSignOut();
+    currentUser = null;
+    currentProfile = null;
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
   }
-  
-  localStorage.setItem('ecodu_username', username);
-  return data;
 }
 
-export async function signOut() {
-  localStorage.removeItem('ecodu_username');
+function updateUIForAuthenticatedUser() {
+  const profileElements = document.querySelectorAll('.profile');
+  profileElements.forEach(el => {
+    const nameEl = el.querySelector('.name');
+    const imageEl = el.querySelector('.image');
+
+    if (nameEl && currentProfile) {
+      nameEl.textContent = currentProfile.name;
+    }
+
+    if (imageEl && currentProfile?.avatar_url) {
+      imageEl.src = currentProfile.avatar_url;
+    }
+  });
+
+  const authButtons = document.querySelectorAll('.auth-buttons');
+  authButtons.forEach(btn => {
+    btn.style.display = 'none';
+  });
+
+  const profileButtons = document.querySelectorAll('.profile-button');
+  profileButtons.forEach(btn => {
+    btn.style.display = 'block';
+  });
 }
 
-export async function updateProfile(username, updates) {
-  const { data, error } = await supabase
-    .from('profiles')
-    .update(updates)
-    .eq('username', username)
-    .select()
-    .single();
+function updateUIForUnauthenticatedUser() {
+  const authButtons = document.querySelectorAll('.auth-buttons');
+  authButtons.forEach(btn => {
+    btn.style.display = 'flex';
+  });
 
-  if (error) throw error;
-  return data;
+  const profileButtons = document.querySelectorAll('.profile-button');
+  profileButtons.forEach(btn => {
+    btn.style.display = 'none';
+  });
 }
-
-export async function uploadAvatar(username, file) {
-  const fileExt = file.name.split('.').pop();
-  const fileName = `${username}-${Date.now()}.${fileExt}`;
+ame}-${Date.now()}.${fileExt}`;
   const filePath = `avatars/${fileName}`;
 
   const { error: uploadError } = await supabase.storage
